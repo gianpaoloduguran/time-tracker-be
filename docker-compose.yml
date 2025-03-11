@@ -1,0 +1,39 @@
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile-postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - time-tracker-network
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: 'dev,test'
+      POSTGRES_PASSWORD: 'timetrackerdevdb'
+  time-tracker-be:
+    container_name: time-tracker-be
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./:/home/django
+    networks:
+      - time-tracker-network
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+
+volumes:
+  db-data:
+
+networks:
+  time-tracker-network:
+    name: time-tracker-network
+    driver: bridge
