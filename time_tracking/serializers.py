@@ -6,6 +6,8 @@ from django.utils import timezone
 
 from rest_framework import serializers
 
+from time_tracking.models import ProjectsModel, TimeTrackingModel
+
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     username = serializers.EmailField(required=True)
@@ -77,3 +79,10 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             user.save()
 
             return user
+
+
+class ProjectsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProjectsModel
+        fields = ["id", "title"]

@@ -3,11 +3,13 @@ from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
-from time_tracking.serializers import UserRegistrationSerializer
+from time_tracking.models import ProjectsModel
+from time_tracking.serializers import ProjectsSerializer, UserRegistrationSerializer
 
 
 class RegisterUserViewSet(GenericViewSet):
@@ -34,3 +36,17 @@ class RegisterUserViewSet(GenericViewSet):
         )
 
         return response
+
+
+class ProjectsViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ProjectsSerializer
+    queryset = ProjectsModel.objects.filter(is_deleted=False)
+
+    def destroy(self, request, *args, **kwargs):
+        """Override method to soft delete the project for archiving purposes."""
+        instance: ProjectsModel = self.get_object()
+
+        instance.is_deleted = True
+        instance.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)

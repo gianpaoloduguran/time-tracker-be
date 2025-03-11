@@ -7,18 +7,19 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from time_tracking.views import RegisterUserViewSet
+from time_tracking.views import ProjectsViewSet, RegisterUserViewSet
 
 
 # from time_tracker import views
 
 router = SimpleRouter(trailing_slash=False)
 urlpatterns = [
-    path("token/", TokenObtainPairView.as_view(), name="login"),
+    path("login/", TokenObtainPairView.as_view(), name="login"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
 
 router.register(r"register", RegisterUserViewSet, basename="register")
+router.register(r"project", ProjectsViewSet, basename="project")
 
 
 urlpatterns = format_suffix_patterns(urlpatterns)
