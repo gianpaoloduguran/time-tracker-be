@@ -1,7 +1,7 @@
 from django.urls import reverse
 
 from rest_framework import status
-from rest_framework.test import APITestCase, APIClient
+from rest_framework.test import APITestCase
 
 from time_tracking.tests.factory import UserFactory
 
@@ -10,10 +10,6 @@ from time_tracking.tests.factory import UserFactory
 
 class AuthenticationTestCase(APITestCase):
     """Class for Authentication test cases."""
-
-    def setUp(self):
-        self.client = APIClient()
-        self.maxDiff = None  # pylint: disable=C0103
 
     @classmethod
     def setUpTestData(cls) -> None:

@@ -86,3 +86,10 @@ class ProjectsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectsModel
         fields = ["id", "title"]
+
+    def validate_title(self, value):
+        """Validate the username if the given value is already taken."""
+        if ProjectsModel.objects.filter(title__exact=value).exists():
+            raise serializers.ValidationError("Project title is already taken.")
+
+        return value

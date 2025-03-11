@@ -3,6 +3,8 @@ import factory
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 
+from time_tracking.models import ProjectsModel
+
 
 class UserFactory(factory.django.DjangoModelFactory):
 
@@ -20,3 +22,10 @@ class UserFactory(factory.django.DjangoModelFactory):
         new_user = super().create(**kwargs)
 
         return new_user
+
+
+class ProjectFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ProjectsModel
+
+    title = factory.Faker("name")
