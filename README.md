@@ -27,15 +27,17 @@ Install these extensions in VS Code:
 VSCode workspace settings are already included in the project (*.vscode/settings.json*)
 
 ##### Run the Project Locally Without Docker
-1. Clone the project
-2. In the project directory create a virtualenv by running the command "python -m venv venv"
-3. Activate the virtualenv
-4. Install the dependencies
-5. Run migrations using "python manage.py migrate"
-6. Run the localhost server using "python manage.py runserver"
+1. Clone the project.
+2. In the project directory create a virtualenv by running the command "python -m venv venv".
+3. Activate the virtualenv.
+4. Install the dependencies.
+5. Run migrations using "python manage.py migrate".
+5. Create a superuser using the command "python manage.py createsuperuser".
+7. Run the localhost server using "python manage.py runserver".
 
 ##### Run the Project Locally Without Docker
-1. Clone the project
-2. Run "docker compose up --build to build the images
-3. Apply migrations using the command "docker exec -it time-tracker-be python manage.py migrate
-4. The app can now be accessed in your localhost port 8000
+1. Clone the project.
+2. Run "docker compose up --build to build the images.
+3. Apply migrations using the command "docker exec -it time-tracker-be python manage.py migrate".
+4. Create a superuser using the command "docker exec -it time-tracker-be python manage.py createsuperuser".
+5. The app can now be accessed in your localhost port 8000.
