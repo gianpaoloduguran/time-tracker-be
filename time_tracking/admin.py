@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from time_tracking.models import ProjectsModel
+
+
+@admin.register(ProjectsModel)
+class ProjectsModelAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "title",
+    )
