@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "time_tracking",
     "rest_framework",
     "drf_yasg",
+    "rest_framework_simplejwt",
 ]
 
 MIDDLEWARE = [
@@ -131,4 +132,9 @@ DATABASES = {
         "HOST": "postgres",
         "PORT": "5432",
     },
+}
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
 }

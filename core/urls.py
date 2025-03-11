@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -28,4 +28,5 @@ urlpatterns = [
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
+    path(API_PREFIX, include("time_tracking.urls")),
 ]
