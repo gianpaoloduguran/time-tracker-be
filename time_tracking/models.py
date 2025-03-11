@@ -29,14 +29,7 @@ class TimeTrackingModel(BaseModel):
     user = models.ForeignKey(User, related_name="records", on_delete=models.CASCADE)
     date_worked = models.DateTimeField()
     work_description = models.CharField(max_length=200)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
-    # minutes = models.IntegerField()
-
-    @property
-    def duration(self):
-        """Return a calculated duration"""
-        return self.end_time - self.start_time
+    hours = models.IntegerField()
 
     @property
     def project_title(self):

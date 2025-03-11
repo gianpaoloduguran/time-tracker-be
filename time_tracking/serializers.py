@@ -93,3 +93,19 @@ class ProjectsSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Project title is already taken.")
 
         return value
+
+
+class TimeTrackingModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TimeTrackingModel
+        fields = [
+            "id",
+            "project",
+            "user",
+            "date_worked",
+            "work_description",
+            "hours",
+            "project_title",
+            "created_at",
+            "updated_at",
+        ]
