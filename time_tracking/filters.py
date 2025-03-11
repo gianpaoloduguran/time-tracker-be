@@ -5,12 +5,14 @@ from time_tracking.models import TimeTrackingModel
 class TimeTrackingModelFilter(django_filters.FilterSet):
     """The filter class for time tracking"""
 
+    # Filter by date range
     start_date = django_filters.DateFilter(
         field_name="date_worked__date", lookup_expr="gte", label="Start Date"
     )
     end_date = django_filters.DateFilter(
         field_name="date_worked__date", lookup_expr="lte", label="End Date"
     )
+    # Filter by Project
     project = django_filters.NumberFilter(field_name="project__id", lookup_expr="exact")
 
     class Meta:
