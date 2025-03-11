@@ -21,12 +21,11 @@ jobs:
       - name: Setup test prerequisites
         run: |
           docker exec -iu root time-tracker-be mkdir /home/django/var
-          docker exec -iu root time-tracker-bechown django:django -R /home/django/var
+          docker exec -iu root time-tracker-be chown django:django -R /home/django/var
           docker exec -iu root time-tracker-be chmod 755 -R /home/django/var
       - name: Prepare migrations and static data
         run: |
           docker exec -i time-tracker-be python manage.py migrate
-          docker exec -i time-tracker-be python manage.py collectstatic --noinput
       - name: Running Test
         run: |
           docker exec -i time-tracker-be python manage.py test --parallel
